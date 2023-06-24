@@ -24,6 +24,14 @@ dependencies {
 }
 publishing {
     if (System.getenv("CI")!=null){
+        publications {
+            maven(MavenPublication) {
+                groupId = this.getGroup()
+                artifactId = this.getName()
+                version = System.getenv("GITHUB_REF_NAME")
+                from components.java
+            }
+        }
         repositories {
             maven {
                 name = "GitHubPackages"
